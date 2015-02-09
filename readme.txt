@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== TriedPassword ===
 Contributors: GlobalWebsoft
 Donate link: http://triedpassword.com
 Tags: security, password, tried, hack, hacking, account security, account,login, login attempt
@@ -36,15 +36,25 @@ you put the stable version, in order to eliminate any doubt.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+The Installtion process of TriedPassword is same as all other WordPress plugins. There is nothing to say about it at all. But still for those who are first time WordPress users, the installation steps are as follows:
 
-e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Login WordPress, in the sidebar click plugins
+2. Then click 'Add New' (placed next to 'Plugins' heading)
+3. a. Then enter triedpassword in the 'Search Plugins' search box, press Enter button of your keyboard 
+3. b. Now you must see triedpassword  with an install now button, click it.
+3. c. You will be prompted with a message "Are you sure you want to install this plugin?" Click OK
+3. d. Your webpage will be reloaded, and new page will have heading Installing Plugin
+3. e. Click Activate Plugin 
+3. f. If you forget to activate the plugin in the earlier step or you have deactivated the plugin then, you may activcate plugin, for that go to plugins, find our plugin and then click on Activate.
+4. a. the alternative method is to upload the downloaded zip file of the plugin. Fot that perform step 1 and  step 2 then click 'Upload Plugin'
+4. b. Click Choose file, then browse path to the zip file. Rest is same as mentioned in subpoints of step 3.
 
 == Frequently Asked Questions ==
+
+= How to Use it? Where to find the TriedPassword?
+
+Login WordPress then click settings in the sidebar(WordPress Settings). Then you should find TriedPassword, your are done, simply click it!
 
 = Is it safe to install it on my website?
 
@@ -68,7 +78,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * A change since the previous version.
 * Another change.
 
-= 0.5 =
+= 0.1 =
 * List versions from most recent at top to oldest at bottom.
 
 == Upgrade Notice ==
