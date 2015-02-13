@@ -1,7 +1,8 @@
 === TriedPassword ===
-Contributors: GlobalWebsoft
-Donate link: http://triedpassword.com
-Tags: security, password, tried, hack, hacking, account security, account,login, login attempt
+Contributors: globalwebsoft, itsalanvega
+Author URI: http://www.globalwebsoft.com/
+Plugin URL: http://triedpassword.com/
+Tags: security, password, tried, hack, hacking, account security, account, login, login attempt
 Requires at least: 3.0.1
 Tested up to: 4.1
 Stable tag: 4.3
