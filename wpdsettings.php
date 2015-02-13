@@ -151,7 +151,7 @@ wpd_pagination_table( count($colunms), $paginate_links );
 
 }else{
 echo '<script>$("#buyLine").show();</script>';
-echo '<tr><th></th><th></th><th></th><th></th><th><a href="http://triedpassword.com">Buy Now </a></th></tr>';
+echo '<tr><th></th><th></th><th></th><th></th><th><a href="http://triedpassword.com/payment" target="_blank">Buy Now </a></th></tr>';
 
 }
 
