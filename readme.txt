@@ -3,7 +3,7 @@ Contributors: GlobalWebsoft
 Donate link: http://triedpassword.com
 Tags: security, password, tried, hack, hacking, account security, account,login, login attempt
 Requires at least: 3.0.1
-Tested up to: 3.4
+Tested up to: 4.1
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,27 +12,11 @@ A Wordpress Plugin that helps you find who tried to force enter your wordpress b
 
 == Description ==
 
-Tried Password is the Wordpress plugin which helps you to find out who tried your wordpress blog at which date,time, username,password and IP. It can easy find out with the help of this small and very useful plugin.It can secure your wordpress blog.
+Tried Password plugin helps you to find out who tried to Login your WordPress site. TriedPassword tracks date, time, username, password and IP of the hacker.
 
-A few notes about the sections above:
+TriedPassword is the only plugin available that provides you with the password that the hacker tried, this really helps you figure out if the hacker is someone known to you or is from outside. You also get to know the IP address used while the attempt, which traces the location in the world. This is a must for anyone serious about safety of website and blog.
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
 
 == Installation ==
 
@@ -52,15 +36,15 @@ The Installtion process of TriedPassword is same as all other WordPress plugins.
 
 == Frequently Asked Questions ==
 
-= How to Use it? Where to find the TriedPassword?
+1) How to Use it? Where to find the TriedPassword?
 
 Login WordPress then click settings in the sidebar(WordPress Settings). Then you should find TriedPassword, your are done, simply click it!
 
-= Is it safe to install it on my website?
+2) Is it safe to install it on my website?
 
 The plugin is 100% safe and ensures and is made for your safety, it helps you find who tried to force enter your blog behind you.
 
-= How is it different from other plugins available in the market? =
+3) How is it different from other plugins available in the market? 
 
 TriedPassword is the only plugin available that provides you with the password that the hacker tried, this really helps you figure out if the hacker is someone known to you or is from outside. You also get to know the IP address used while the attempt, which traces the location in the world. This is a must for anyone serious about safety of website and blog.
 
