@@ -17,6 +17,8 @@ Tried Password plugin helps you to find out who tried to Login your WordPress si
 
 TriedPassword is the only plugin available that provides you with the password that the hacker tried, this really helps you figure out if the hacker is someone known to you or is from outside. You also get to know the IP address used while the attempt, which traces the location in the world. This is a must for anyone serious about safety of website and blog.
 
+Visit http://triedpassword.com
+
 
 
 == Installation ==
@@ -35,6 +37,8 @@ The Installtion process of TriedPassword is same as all other WordPress plugins.
 4. a. the alternative method is to upload the downloaded zip file of the plugin. Fot that perform step 1 and  step 2 then click 'Upload Plugin'
 4. b. Click Choose file, then browse path to the zip file. Rest is same as mentioned in subpoints of step 3.
 
+Visit http://triedpassword.com
+
 == Frequently Asked Questions ==
 
 1) How to Use it? Where to find the TriedPassword?
@@ -49,10 +53,11 @@ The plugin is 100% safe and ensures and is made for your safety, it helps you fi
 
 TriedPassword is the only plugin available that provides you with the password that the hacker tried, this really helps you figure out if the hacker is someone known to you or is from outside. You also get to know the IP address used while the attempt, which traces the location in the world. This is a must for anyone serious about safety of website and blog.
 
+Visit http://triedpassword.com
+
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets 
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` 
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Know the username, password and trace the location. Visit http://triedpassword.com
+2. Locate TriedPassword under the settings. Visit http://triedpassword.com
+3. Know failed as well as successful login attempts, to keep a watch on any unauthorized activity.
+
