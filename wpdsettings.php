@@ -1,14 +1,16 @@
 <?php ob_start();?>
+
 <?php
 include_once 'wpdfunctions.php'; 
 include_once 'wpdoptions.php'; 
+
 $current_page_number = (int) (isset($_GET['page_number']) ? $_GET['page_number'] : 1);
 global $siteurl;
 ?>
 <div class="wrap">
 <div id="icon-options-general" class="icon32"></div>
 <div>
-<h2 >Tried Password  </h2>
+<h2 >TriedPassword  </h2>
 <!--<h2 style="margin-top:-40px"  align="right" id="buylink" ><a  class="btn" href="http://triedpassword.com">Buy Now </a></h2>-->
 </div>
 <?php $siteurl=show_wpd_tabs(); ?>
@@ -18,6 +20,7 @@ global $siteurl;
 <div id="post-body-content">
 <div class="meta-box-sortables ui-sortable">
 <div class="postbox" style="height:auto;width:1147PX">
+
 <?php
 $current_tab = get_wpd_current_tab();
 switch ($current_tab) {
@@ -25,8 +28,11 @@ case 'login_fail':
 include_once 'common.php'; 
 ?>
 <h3  style="cursor:pointer;color:black"><span>Below are the list of recent un-authorised access on your website :</span>
-  <p id="buyLine" style="color:black;display:none">
-    Free version would only show upto 10 failed attempts. Please buy now to move to Pro</p></h3>
+  
+  <!--<p id="buyLine" style="color:black;display:none">
+    Free version would only show upto 10 failed attempts. Please buy now to move to Pro</p>
+-->
+  </h3>
 <div class="inside">
 <?php
 $colunms = array();
@@ -37,7 +43,7 @@ $colunms['th-user']       = __('User', 'wpd_security');
 
 $colunms['th-password']   = __('Password', 'wpd_security');
 
-$colunms['th-ip']         = __('IP', 'wpd_security');
+$colunms['th-ip']         = __('Trace Location', 'wpd_security');
 
 $colunms['th-user_agent'] = __('Browser', 'wpd_security');
 
@@ -101,13 +107,17 @@ foreach ($items as $k => $item) : ?>
 
 <td><?php echo  $item['pwdmd5'] ; ?></td>
 
-<td><?php echo $item['IPAddress']; ?><br>
+<!-- <td><?php echo $item['IPAddress']; ?><br>
 
 <a href="http://ip2location.com/<?php echo $item['IPAddress']; ?>" target="blank">Trace IP</a>
 
+</td> -->
+<td>
+<input type="button"   value="Get Details"   ipv="<?php echo $item['IPAddress']; ?>"   rid="<?php echo $item['id'];?>"     class="button-primary ip">
 </td>
 
-<td><?php echo $item['Useragent']; ?></td>
+<td><input type="button"   value="Show Browser"   bs="<?php echo $item['Useragent']; ?>"       class="button-primary bs"></td>
+
 
 <td><?php echo $item['Referer'];  $counter++; ?></td>
 
@@ -175,14 +185,138 @@ echo '<tr><th></th><th></th><th></th><th></th><th><a href="http://triedpassword.
 
 <script type="text/javascript">
 
-function test(id,path) {
+ 
+$(".bs").click(function()
+{
+ var bs=$(this).attr("bs");
+  var url="<?php echo WPD_URLIP;?>";
+  var domain="<?php echo site_url(); ?>";
+  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
+       $("#myModal").modal('show');
+        $("#loading").show();
+        
+        /* clear all start */
+        $("#message").html('');
+        $("#ip").html('');
+        $("#country").html('');
+        $("#state").html('');
+        $("#city").html('');
+        $("#timezone").html('');
+        $("#longitude").html('');
+        $("#latitude").html('');
+        /*clear  all end */
+   $.ajax({
+      url:url,
+      type:"post",
+      data:{bstatus:"1",domain:domain,email:email},
+      dataType:"json",
+      success:function(data){       
+        $("#loading").hide();
+        if(data.bs=="1")
+        {  
+        $("#message").html(bs);
+        }else{
+        $("#message").html(data.message);
+       }
+      }
+      });
 
-//alert(path);
+});
+ 
+$(".ip").click(function()
+{
+ 
+  var url="<?php echo WPD_URLIP;?>";
+  var ip=$(this).attr("rid");
+  var ipv=$(this).attr("ipv")
+  
+         $("#ip").html();
+        $("#city").html();
+       $("#loading").show();
+        
+        $("#myModal").modal('show');
+    var url="<?php echo WPD_URLIP;?>";
+  var domain="<?php echo site_url(); ?>";
+   var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
 
-}
+  var ip=$(this).attr("rid");
+  var ipv=$(this).attr("ipv");
+        $("#ip").html();
+        $("#city").html();
+        $("#myModal").modal('show');
+        $("#loading").show();
+        
+        /* clear all start */
+        $("#message").html('');
+        $("#ip").html('');
+        $("#country").html('');
+        $("#state").html('');
+        $("#city").html('');
+        $("#timezone").html('');
+        $("#longitude").html('');
+        $("#latitude").html('');
+        /*clear  all end */
+   $.ajax({
+      url:url,
+      type:"post",
+      data:{ip:ipv,domain:domain,email:email},
+      dataType:"json",
+      success:function(data){       
+        $("#message").html(data.message);
+        $("#ip").html("Ip     :-  "+data.ip);
+        $("#country").html("Country :-  "+data.country);
+        $("#state").html("State :-  "+data.region);
+        $("#city").html("City :-  "+data.city);
+        $("#timezone").html("Timezone :-  "+data.timezone);
+        $("#longitude").html("Longitude :-  "+data.longitude);
+        $("#latitude").html("Latitude :-  "+data.latitude);
+        $("#loading").hide();
+        
+
+                
+                
+      }
+      });
+
+});
+
+
 
 </script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Unauthorized Access Detail</h4>
+            </div>
+            <div class="modal-body">
+              <img   style="margin-left:40%;display:none" id="loading"  src="<?php echo  plugin_dir_url( __FILE__ ) . '/loading.gif';?>"  />
+                
+                <p id="message" style="color:red;font-weight:bold"></p>
+                <p id="ip"></p>
+                <p  id="country"></p>
+                
+                <p  id="state"></p>
+                
+                <p id="city"></p>
+                
+                <p id="timezone"></p>
+                <p id="longitude"></p>
+                <p id="latitude"></p>
+             <img   style="margin-left:40%;display:none" id="loading"  src="<?php echo  plugin_dir_url( __FILE__ ) . '/logo.jpg';?>"  />
+           </div>
+            
+        </div>
+    </div>
+</div>
 <?php
 
 break;
@@ -207,7 +341,7 @@ $colunms['th-date']       = __('Date', 'wpd_security');
 
 $colunms['th-user']       = __('User', 'wpd_security');
 
-$colunms['th-ip']         = __('IP', 'wpd_security');
+$colunms['th-ip']         = __('Trace Location', 'wpd_security');
 
 $colunms['th-user_agent'] = __('Browser', 'wpd_security');
 
@@ -257,9 +391,13 @@ foreach ($items as $k => $item) : ?>
 
 <td><?php echo get_wpd_format_user( $item['UserId'] ); ?></td>
 
-<td><?php echo $item['IPAddress']; ?><br><a href="http://ip2location.com/<?php echo $item['IPAddress']; ?>" target="blank">Trace IP</a></td>
+<!--<td><?php //echo $item['IPAddress']; ?><br><a href="http://ip2location.com/<?php //echo $item['IPAddress']; ?>" target="blank">Trace IP</a></td>
+-->
+<td>
+<input type="button"   value="Get Details"   ipv="<?php echo $item['IPAddress']; ?>"   rid="<?php echo $item['id'];?>"     class="button-primary ip">
+</td>
 
-<td><?php echo $item['Useragent']; ?></td>
+<td><input type="button"   value="Show Browser"   bs="<?php echo $item['Useragent']; ?>"       class="button-primary bs"></td>
 
 <td><?php echo $item['Referer'];  $counter++; ?></td>
 
@@ -304,7 +442,133 @@ wpd_pagination_table( count($colunms), $paginate_links );
 </tbody>
 
 </table>
+<script type="text/javascript">
+ 
+$(".bs").click(function()
+{
+ var bs=$(this).attr("bs");
+  var url="<?php echo WPD_URLIP;?>";
+  var domain="<?php echo site_url(); ?>";
+  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
+       $("#myModal").modal('show');
+        $("#loading").show();
+        
+        /* clear all start */
+        $("#message").html('');
+        $("#ip").html('');
+        $("#country").html('');
+        $("#state").html('');
+        $("#city").html('');
+        $("#timezone").html('');
+        $("#longitude").html('');
+        $("#latitude").html('');
+        /*clear  all end */
+   $.ajax({
+      url:url,
+      type:"post",
+      data:{bstatus:"1",domain:domain,email:email},
+      dataType:"json",
+      success:function(data){       
+        $("#loading").hide();
+        alert("fine");
+        if(data.bs=="1")
+        {  
+        
+        $("#message").html("<p style='color:black'>"+bs+"</p>");
+        
+        }else{
+        $("#message").html(data.message);
+       }
+      }
+      });
 
+});
+$(".ip").click(function()
+{
+ 
+  var url="<?php echo WPD_URLIP;?>";
+  var domain="<?php echo site_url(); ?>";
+  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
+
+  var ip=$(this).attr("rid");
+  var ip=$(this).attr("rid");
+  var ipv=$(this).attr("ipv");
+        $("#ip").html();
+        $("#city").html();
+        $("#myModal").modal('show');
+        $("#loading").show();
+        $("#message").html('');
+        /* clear all start */
+        $("#message").html('');
+        $("#ip").html('');
+        $("#country").html('');
+        $("#state").html('');
+        $("#city").html('');
+        $("#timezone").html('');
+        $("#longitude").html('');
+        $("#latitude").html('');
+        /*clear  all end */
+
+   $.ajax({
+      url:url,
+      type:"post",
+      data:{ip:ipv,domain:domain,email:email},
+      dataType:"json",
+      success:function(data){    
+
+        $("#message").html(data.message);
+        $("#ip").html("Ip     :-  "+data.ip);
+        $("#country").html("Country :-  "+data.country);
+        $("#state").html("State :-  "+data.region);
+        $("#city").html("City :-  "+data.city);
+        $("#timezone").html("Timezone :-  "+data.timezone);
+        $("#longitude").html("Longitude :-  "+data.longitude);
+        $("#latitude").html("Latitude :-  "+data.latitude);
+        $("#loading").hide();
+        
+
+                
+                
+      }
+      });
+
+});
+
+</script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Unauthorized Access Detail</h4>
+            </div>
+            <div class="modal-body">
+              <img   style="margin-left:40%;display:none" id="loading"  src="<?php echo  plugin_dir_url( __FILE__ ) . '/loading.gif';?>"  />
+                
+                <p id="message" style="color:red;font-weight:bold"></p>
+                <p id="ip"></p>
+                <p  id="country"></p>
+                
+                <p  id="state"></p>
+                
+                <p id="city"></p>
+                
+                <p id="timezone"></p>
+                <p id="longitude"></p>
+                <p id="latitude"></p>
+             <img   style="margin-left:40%;display:none" id="loading"  src="<?php echo  plugin_dir_url( __FILE__ ) . '/logo.jpg';?>"  />
+           </div>
+            
+        </div>
+    </div>
+</div>
 <?php
 
 break;
@@ -365,9 +629,10 @@ h3{
 
 $domain= site_url();
 
-//$email=bloginfo('admin_email');
+$current_user = wp_get_current_user();  
 
-$email=get_option( 'admin_email' );
+ $email=$current_user->user_email;
+
 
 if(!get_option("emailaddress")){
 
@@ -532,7 +797,7 @@ Minute
 <tr><th></th></tr>
 
 <tr><td>Enter Email Address</td>
-	<td><input   id="txtEmail" type="text"  name="email"  value="<?php if(get_option( 'emailaddress')){ echo get_option( 'emailaddress'); }?>"   ></td></tr>
+	<td><input   id="txtEmail" type="text"  name="email"  value="<?php echo get_option('emailaddress');?>"   ></td></tr>
 
 <tr><td><input type="submit"  
 
@@ -544,9 +809,27 @@ name="wpdformoptions" value="Save"   onclick="return checkEmail()" class="button
 
 </form>
 
-<div>
 
-<script> function checkEmail() {     var email = document.getElementById("txtEmail");    if(email.value!="")	{	    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;    if (!filter.test(email.value)) {    alert("Please provide a valid email address");    email.focus;    return false;    }	} }	 
+<script>
+
+
+
+
+
+
+
+ function checkEmail()
+  {   
+    var email = document.getElementById("txtEmail");   
+     if(email.value!="")	{	
+         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;  
+           if (!filter.test(email.value)) 
+            {  
+              alert("Please provide a valid email address"); 
+                 email.focus;    return false;   
+                  }	
+                } 
+              }	 
 function RefreshValues()	 {
       document.getElementById("container").innerHTML="<h1>Updating...<h1></tr>"		;	
        }	
@@ -554,8 +837,10 @@ function RefreshValues()	 {
         {    
             var charCode = (evt.which) ? evt.which : event.keyCode       
              if (charCode > 31 && (charCode < 48 || charCode > 57))   
-                  { return false; }else{}        return true;  }
-        }
+                  { return false; }else{}        return true; 
+
+         }
+        
 
 </script>
 
@@ -608,3 +893,4 @@ break;
 }
 
  echo '<script> $(".postbox").css("cursor", "pointer"); </script>';
+?>
