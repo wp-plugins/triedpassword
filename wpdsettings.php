@@ -10,9 +10,11 @@ global $siteurl;
 <div class="wrap">
 <div id="icon-options-general" class="icon32"></div>
 <div>
-<h2 >TriedPassword  </h2>
-<!--<h2 style="margin-top:-40px"  align="right" id="buylink" ><a  class="btn" href="http://triedpassword.com">Buy Now </a></h2>-->
-</div>
+
+
+<h2 ><img src="<?php echo  plugin_dir_url( __FILE__ ).'/TriedPassword.png' ; ?>" >	 </h2>
+<h2 style="margin-top:-40px"  align="right"  ><a   class="button-primary"  href="http://triedpassword.com"  target="_blank" >Upgrade To Pro  </a></h2>
+</div> 
 <?php $siteurl=show_wpd_tabs(); ?>
 <div id="poststuff">
 <div id="post-body" class="metabox-holder columns-2">
@@ -81,7 +83,7 @@ if($links)
 
 $paginate_links = wpd_paginate_links( $current_page_number );
 
-echo '<script>document.getElementById("buylink").style.display = "none"</script>';
+//echo '<script>document.getElementById("buylink").style.display = "none"</script>';
 
 }
 
@@ -160,8 +162,7 @@ if($links)
 wpd_pagination_table( count($colunms), $paginate_links );
 
 }else{
-echo '<script>$("#buyLine").show();</script>';
-echo '<tr><th></th><th></th><th></th><th></th><th><a href="http://triedpassword.com/payment" target="_blank">Buy Now </a></th></tr>';
+
 
 }
 
@@ -182,20 +183,13 @@ echo '<tr><th></th><th></th><th></th><th></th><th><a href="http://triedpassword.
 </table>
 
 <script src="<?php echo LS_USER_PLUGIN_URLs; ?>/js/jquery.js" ></script>
-
 <script type="text/javascript">
-
  
 $(".bs").click(function()
 {
- var bs=$(this).attr("bs");
-  var url="<?php echo WPD_URLIP;?>";
-  var domain="<?php echo site_url(); ?>";
-  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
-       $("#myModal").modal('show');
-        $("#loading").show();
-        
-        /* clear all start */
+
+		/* clear all start */
+		$("#message").html('');
         $("#message").html('');
         $("#ip").html('');
         $("#country").html('');
@@ -204,83 +198,49 @@ $(".bs").click(function()
         $("#timezone").html('');
         $("#longitude").html('');
         $("#latitude").html('');
-        /*clear  all end */
-   $.ajax({
-      url:url,
-      type:"post",
-      data:{bstatus:"1",domain:domain,email:email},
-      dataType:"json",
-      success:function(data){       
-        $("#loading").hide();
-        if(data.bs=="1")
-        {  
-        $("#message").html(bs);
-        }else{
-        $("#message").html(data.message);
-       }
-      }
-      });
+		/* clear all end */
+ $(".modal-title").html("Browser Details");
+        $("#message").html('<p style="color:black"><a    class="btn btn-primary"  href="http://triedpassword.com"  target="_blank" >Upgrade To Pro  </a></p>');
+       $("#myModal").modal('show');
 
 });
- 
 $(".ip").click(function()
 {
  
   var url="<?php echo WPD_URLIP;?>";
-  var ip=$(this).attr("rid");
-  var ipv=$(this).attr("ipv")
-  
-         $("#ip").html();
-        $("#city").html();
-       $("#loading").show();
-        
-        $("#myModal").modal('show');
-    var url="<?php echo WPD_URLIP;?>";
   var domain="<?php echo site_url(); ?>";
-   var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
+  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
 
+  var ip=$(this).attr("rid");
   var ip=$(this).attr("rid");
   var ipv=$(this).attr("ipv");
         $("#ip").html();
         $("#city").html();
+		$(".modal-title").html("Location Details");
         $("#myModal").modal('show');
         $("#loading").show();
-        
-        /* clear all start */
         $("#message").html('');
-        $("#ip").html('');
-        $("#country").html('');
-        $("#state").html('');
-        $("#city").html('');
-        $("#timezone").html('');
-        $("#longitude").html('');
-        $("#latitude").html('');
+        /* clear all start */
+        $("#message").html('--');
+        $("#ip").html('--');
+        $("#country").html('country: --');
+        $("#state").html('state: --');
+        $("#city").html('city: --');
+        $("#timezone").html('timezone: --');
+        $("#longitude").html('longitude: --');
+        $("#latitude").html('latitude: --');
         /*clear  all end */
-   $.ajax({
-      url:url,
-      type:"post",
-      data:{ip:ipv,domain:domain,email:email},
-      dataType:"json",
-      success:function(data){       
-        $("#message").html(data.message);
-        $("#ip").html("Ip     :-  "+data.ip);
-        $("#country").html("Country :-  "+data.country);
-        $("#state").html("State :-  "+data.region);
-        $("#city").html("City :-  "+data.city);
-        $("#timezone").html("Timezone :-  "+data.timezone);
-        $("#longitude").html("Longitude :-  "+data.longitude);
-        $("#latitude").html("Latitude :-  "+data.latitude);
+
+   //$("#loading").show();
+        $("#message").html('<p style="color:black"><a    class="btn btn-primary"  href="http://triedpassword.com"  target="_blank" >Upgrade To Pro  </a></p>');
+       
         $("#loading").hide();
         
 
                 
-                
-      }
-      });
+     
 
 });
-
-
 
 </script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -295,7 +255,7 @@ $(".ip").click(function()
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Unauthorized Access Detail</h4>
+                <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
               <img   style="margin-left:40%;display:none" id="loading"  src="<?php echo  plugin_dir_url( __FILE__ ) . '/loading.gif';?>"  />
@@ -446,14 +406,8 @@ wpd_pagination_table( count($colunms), $paginate_links );
  
 $(".bs").click(function()
 {
- var bs=$(this).attr("bs");
-  var url="<?php echo WPD_URLIP;?>";
-  var domain="<?php echo site_url(); ?>";
-  var email="<?php  $current_user = wp_get_current_user();  echo $current_user->user_email; ?>";
-       $("#myModal").modal('show');
-        $("#loading").show();
-        
-        /* clear all start */
+		/* clear all start */
+		$("#message").html('');
         $("#message").html('');
         $("#ip").html('');
         $("#country").html('');
@@ -462,25 +416,10 @@ $(".bs").click(function()
         $("#timezone").html('');
         $("#longitude").html('');
         $("#latitude").html('');
-        /*clear  all end */
-   $.ajax({
-      url:url,
-      type:"post",
-      data:{bstatus:"1",domain:domain,email:email},
-      dataType:"json",
-      success:function(data){       
-        $("#loading").hide();
-        alert("fine");
-        if(data.bs=="1")
-        {  
-        
-        $("#message").html("<p style='color:black'>"+bs+"</p>");
-        
-        }else{
-        $("#message").html(data.message);
-       }
-      }
-      });
+		/* clear all end */
+		$(".modal-title").html("Browser Details");
+        $("#message").html('<p style="color:black"><a    class="btn btn-primary"  href="http://triedpassword.com"  target="_blank" >Upgrade To Pro  </a></p>');
+       $("#myModal").modal('show');
 
 });
 $(".ip").click(function()
@@ -495,45 +434,31 @@ $(".ip").click(function()
   var ipv=$(this).attr("ipv");
         $("#ip").html();
         $("#city").html();
+		$(".modal-title").html("Location Details");
         $("#myModal").modal('show');
         $("#loading").show();
         $("#message").html('');
         /* clear all start */
-        $("#message").html('');
-        $("#ip").html('');
-        $("#country").html('');
-        $("#state").html('');
-        $("#city").html('');
-        $("#timezone").html('');
-        $("#longitude").html('');
-        $("#latitude").html('');
+        $("#message").html('--');
+        $("#ip").html('--');
+        $("#country").html('country: --');
+        $("#state").html('state: --');
+        $("#city").html('city: --');
+        $("#timezone").html('timezone: --');
+        $("#longitude").html('longitude: --');
+        $("#latitude").html('latitude: --');
         /*clear  all end */
 
-   $.ajax({
-      url:url,
-      type:"post",
-      data:{ip:ipv,domain:domain,email:email},
-      dataType:"json",
-      success:function(data){    
-
-        $("#message").html(data.message);
-        $("#ip").html("Ip     :-  "+data.ip);
-        $("#country").html("Country :-  "+data.country);
-        $("#state").html("State :-  "+data.region);
-        $("#city").html("City :-  "+data.city);
-        $("#timezone").html("Timezone :-  "+data.timezone);
-        $("#longitude").html("Longitude :-  "+data.longitude);
-        $("#latitude").html("Latitude :-  "+data.latitude);
+   //$("#loading").show();
+        $("#message").html('<p style="color:black"><a    class="btn btn-primary"  href="http://triedpassword.com"  target="_blank" >Upgrade To Pro  </a></p>');
+       
         $("#loading").hide();
         
 
                 
-                
-      }
-      });
+     
 
 });
-
 </script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
@@ -642,7 +567,7 @@ update_option('emailaddress',$email);
 
  
 
-if(!get_option("wpd")){
+if(false){
 
 $msg= '
 
